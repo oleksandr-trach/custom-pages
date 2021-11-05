@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">page_import_form.import_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Page Import</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Aiops\AmastyExtend\Block\Adminhtml\Block\Edit\SaveButton" />
+            <button name="back" class="Aiops\AmastyExtend\Block\Adminhtml\Block\Edit\BackButton" />
+        </buttons>
+        <namespace>page_import_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>page_import_form.import_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="import_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="amasty_shopbypage/page/importProcess" />
+        </settings>
+        <dataProvider class="Aiops\AmastyExtend\Model\Block\DataProvider" name="import_form_data_source">
+            <settings>
+                <requestFieldName>none</requestFieldName>
+                <primaryFieldName>none</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Upload CSV file to start the import</label>
+        </settings>
+        <field name="import_file" formElement="fileUploader">
+            <settings>
+                <label translate="true">Import File</label>
+                <notice translate="true">Use CSV extension files only</notice>
+            </settings>
+            <formElements>
+                <fileUploader>
+                    <settings>
+                        <allowedExtensions>csv</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">amasty_shopbypage/page_import_fileUploader/save</param>
+                        </uploaderConfig>
+                    </settings>
+                </fileUploader>
+            </formElements>
+        </field>
+    </fieldset>
+</form>
